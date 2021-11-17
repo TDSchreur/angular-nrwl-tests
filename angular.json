@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "projects": {
+    "ape": {
+      "projectType": "application",
+      "root": "apps/ape",
+      "sourceRoot": "apps/ape/src",
+      "prefix": "tdschreur",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/ape",
+            "index": "apps/ape/src/index.html",
+            "main": "apps/ape/src/main.ts",
+            "polyfills": "apps/ape/src/polyfills.ts",
+            "tsConfig": "apps/ape/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": ["apps/ape/src/favicon.ico", "apps/ape/src/assets"],
+            "styles": ["apps/ape/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/ape/src/environments/environment.ts",
+                  "with": "apps/ape/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "ape:build:production"
+            },
+            "development": {
+              "browserTarget": "ape:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ape:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/ape/src/**/*.ts",
+              "apps/ape/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/ape"],
+          "options": {
+            "jestConfig": "apps/ape/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "ape-e2e": {
+      "root": "apps/ape-e2e",
+      "sourceRoot": "apps/ape-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/ape-e2e/cypress.json",
+            "devServerTarget": "ape:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ape:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/ape-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["ape"]
+    }
+  }
+}
