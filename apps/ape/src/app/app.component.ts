@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Todo } from '@tdschreur/data';
 
 @Component({
   selector: 'tdschreur-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ape';
+  todos: Todo[] = [{ title: 'Todo 1' }, { title: 'Todo 2' }];
+
+  addTodo() {
+    this.todos.push({
+      title: `New todo ${Math.floor(Math.random() * 1000)}`,
+    });
+  }
 }

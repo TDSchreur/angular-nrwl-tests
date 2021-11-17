@@ -18,7 +18,10 @@
             "tsConfig": "apps/ape/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["apps/ape/src/favicon.ico", "apps/ape/src/assets"],
-            "styles": ["apps/ape/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/ape/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -119,6 +122,81 @@
       },
       "tags": [],
       "implicitDependencies": ["ape"]
+    },
+    "data": {
+      "root": "libs/data",
+      "sourceRoot": "libs/data/src",
+      "projectType": "library",
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["libs/data/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/data"],
+          "options": {
+            "jestConfig": "libs/data/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "entity-form": {
+      "projectType": "library",
+      "root": "libs/entity-form",
+      "sourceRoot": "libs/entity-form/src",
+      "prefix": "tdschreur",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/entity-form"],
+          "options": {
+            "jestConfig": "libs/entity-form/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/entity-form/src/**/*.ts",
+              "libs/entity-form/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "tier1-control": {
+      "projectType": "library",
+      "root": "libs/tier1-control",
+      "sourceRoot": "libs/tier1-control/src",
+      "prefix": "tdschreur",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/tier1-control"],
+          "options": {
+            "jestConfig": "libs/tier1-control/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/tier1-control/src/**/*.ts",
+              "libs/tier1-control/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
